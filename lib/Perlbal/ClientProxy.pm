@@ -25,6 +25,7 @@ use fields (
             'content_length_remain', # int: amount of data we're still waiting for
             'responded',           # bool: whether we've already sent a response to the user or not
             'last_request_time',   # int: time that we last received a request
+            'last_request_time_hr', # arrayref: results from gettimeofday
             'primary_res_hdrs',  # if defined, we are doing a transparent reproxy-URI
                                  # and the headers we get back aren't necessarily
                                  # the ones we want.  instead, get most headers
@@ -86,6 +87,7 @@ sub init {
     my Perlbal::ClientProxy $self = $_[0];
 
     $self->{last_request_time} = 0;
+    $self->{last_request_time_hr} = undef;
 
     $self->{backend} = undef;
     $self->{high_priority} = 0;
@@ -791,6 +793,7 @@ sub handle_request {
     # note that we've gotten a request
     $self->{requests}++;
     $self->{last_request_time} = $self->{alive_time};
+    $self->{last_request_time_hr} = [ gettimeofday() ];
 
     # either start buffering some of the request to memory, or
     # immediately request a backend connection.

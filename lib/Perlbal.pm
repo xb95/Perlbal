@@ -70,6 +70,7 @@ use Getopt::Long;
 use Carp qw(cluck croak);
 use Errno qw(EBADF);
 use POSIX qw(SIG_BLOCK SIG_UNBLOCK SIGINT sigprocmask);
+use Time::HiRes qw(tv_interval gettimeofday);
 
 our(%TrackVar);
 sub track_var {
@@ -799,7 +800,7 @@ sub MANAGE_states {
 
 sub MANAGE_queues {
     my $mc = shift->no_opts;
-    my $now = time;
+    my $now = [ gettimeofday() ];
 
     foreach my $svc (values %service) {
         next unless $svc->{role} eq 'reverse_proxy';
@@ -812,10 +813,10 @@ sub MANAGE_queues {
 
         while (my ($queue_name, $clients_key) = each %queues) {
             my $age = 0;
-            my $count = @{$svc->{$clients_key}};
+            my $count = scalar @{$svc->{$clients_key}};
             my Perlbal::ClientProxy $oldest = $svc->{$clients_key}->[0];
-            $age = $now - $oldest->{last_request_time} if defined $oldest;
-            $mc->out("$svc->{name}-$queue_name.age $age");
+            $age = tv_interval($oldest->{last_request_time_hr}, $now) if defined $oldest;
+            $mc->out(sprintf("$svc->{name}-$queue_name.age %0.3f", $age));
             $mc->out("$svc->{name}-$queue_name.count $count");
         }
     }
