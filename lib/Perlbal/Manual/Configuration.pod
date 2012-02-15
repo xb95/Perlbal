@@ -125,6 +125,14 @@ For a full list of parameters see L<Perlbal::Manual::LoadBalancer>, L<Perlbal::M
 'size' values are in integer bytes, or an integer followed by 'b', 'k', or 'm' (case-insensitive) for bytes, KiB, or MiB.
 
 
+=head3 Setting parameter defaults
+
+Outside the scope of a service you can set parameter defaults for all following created services:
+
+    SET <param> = <value>
+
+This takes the same parameters as the section above L</"Setting parameters>
+
 =head3 Enabling/Disabling services
 
 To enable a service:
