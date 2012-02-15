@@ -221,6 +221,16 @@ This is the variable you'll have to set to a true value in order to properly use
 See L<Perlbal::Manual::Management> for more information.
 
 
+=head3 PERLBAL_REMOVE_FIELDS
+
+Setting this variable true will give perlbal an extra speed boost on perl 5.10+ by removing run-time locking
+of field names on internal objects. As a tradeoff this will make code such as plugins or patch sets that
+incorrectly handling fields in perlbal to silently fail rather than giving warnings and errors.
+
+Use with caution until you trust your combination of perlbal version, plugins and versions and other
+patches you may have applied. Once you trust you perlbal instance to have no problems this option should
+simply make perlbal faster.
+
 =head3 PERLBAL_TEST_ALPHA
 
 This is a variable used to test Perlbal's alpha features.
