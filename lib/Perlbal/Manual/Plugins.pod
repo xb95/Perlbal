@@ -1,6 +1,6 @@
 =head1 NAME
 
-Perlbal::Manual - Creating and using plugins
+Perlbal::Manual::Plugins - Creating and using plugins
 
 
 =head2 VERSION
