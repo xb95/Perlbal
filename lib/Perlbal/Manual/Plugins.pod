@@ -436,6 +436,11 @@ Simple plugin demonstrating how to create an add-on service for Perlbal using th
 Add a custom header according to the SSL of a service.
 
 
+=item * L<Perlbal::Plugin::FlvStreaming>
+
+Enable FLV streaming with reverse proxy.
+
+
 =item * L<Perlbal::Plugin::ForwardedFor>
 
 Rename the X-Forwarded-For header in Perlbal.
