@@ -496,6 +496,11 @@ Basic Perlbal statistics gatherer.
 Session affinity for Perlbal.
 
 
+=item * L<Perlbal::Plugin::Throttle> (Perlbal core)
+
+Throttle connections from hosts that connect too frequently.
+
+
 =item * L<Perlbal::Plugin::TrustHeader>
 
 Remove untrusted headers.
