@@ -526,6 +526,12 @@ Name-based virtual hosts.
 Select by path (selector role only).
 
 
+=item * L<Perlbal::Plugin::XFFExtras> (Perlbal core)
+
+Perlbal plugin that can optionally add an X-Forwarded-Port and/or
+X-Forwarded-Proto header to reverse proxied requests.
+
+
 =back
 
 
